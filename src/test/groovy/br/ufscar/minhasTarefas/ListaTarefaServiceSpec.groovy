@@ -41,6 +41,7 @@ class ListaTarefaServiceSpec extends Specification {
         def listasRetornadas = service.listar()
         then: "ela tem que ter tamanho 2"
         listasRetornadas.size() == 2
+        and: "Deve conter as listas criadas no teste"
         listasRetornadas.containsAll(lista1, lista2)
     }
 }
