@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.ufscar.minhasTarefas.ListaTarefaSpec" tests="1" skipped="0" failures="1" errors="0" timestamp="2016-06-04T14:13:21" hostname="l4m21" time="0.08">
+  <properties/>
+  <testcase name="test something" classname="br.ufscar.minhasTarefas.ListaTarefaSpec" time="0.08">
+    <failure message="Condition not satisfied:&#10;&#10;true == false&#10;     |&#10;     false&#10;" type="org.spockframework.runtime.SpockComparisonFailure">Condition not satisfied:
+
+true == false
+     |
+     false
+
+	at br.ufscar.minhasTarefas.ListaTarefaSpec.test something(ListaTarefaSpec.groovy:20)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

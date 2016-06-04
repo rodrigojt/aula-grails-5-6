@@ -8,6 +8,10 @@ class ListaTarefaService {
 
     def usuarioService
 
+    def listar(){
+        return ListaTarefa.all
+    }
+
     ListaTarefa inserir(ListaTarefa novaListaTarefa) {
 
         /*
