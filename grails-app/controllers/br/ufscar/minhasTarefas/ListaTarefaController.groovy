@@ -2,9 +2,16 @@ package br.ufscar.minhasTarefas
 
 import grails.converters.JSON
 
+import grails.validation.ValidationException
+
 class ListaTarefaController {
 
-    def inserir() {
+    def listaTarefaService // Convenção
+    // def listaTarefaService = new() ListaTarefaService()
+
+    def messageSource
+
+    def inserir(ListaTarefa novaListaTarefa) {
 
         /*
         println params
@@ -12,19 +19,36 @@ class ListaTarefaController {
         println params.usuario
         */
 
-        String nome = params.nome
-        String usuario = params.usuario
+        try {
+            novaListaTarefa =
+                    listaTarefaService.inserir(novaListaTarefa)
 
-        def novaListaTarefa = new ListaTarefa(nome: nome, usuario: usuario)
+            render novaListaTarefa as JSON
+        }
+        catch (ValidationException validationException) {
+            // Percorrer todos os erros
+            def erros = []
+            validationException.errors.allErrors.each {
+                erros << messageSource.getMessage(it, null)
+            }
+            // render (['erros': validationException.message] as JSON)
+            render(['erros': erros] as JSON)
+            return
+        }
+        catch (Exception exception) {
+            // println exception.message
+            render(['erro': exception.message] as JSON)
+            return
+        }
 
+        /*
         // if (!novaListaTarefa.save(failOnError:true)) {
         if (!novaListaTarefa.save()) {
             // faz alguma coisa
             render (novaListaTarefa.errors.allErrors as JSON)
             return
         }
-
-        render novaListaTarefa as JSON
+        */
 
     }
 
@@ -76,13 +100,13 @@ class ListaTarefaController {
 
         // Se não remover, mostra erro
         if (!listaTarefa) {
-            render (['erro': "Nao existe o objeto selecionado"] as JSON)
+            render(['erro': "Nao existe o objeto selecionado"] as JSON)
             return
         }
 
         // Se remover mostra sucesso
         listaTarefa.delete()
-        render (['sucesso': "Objeto removido com sucesso"] as JSON)
+        render(['sucesso': "Objeto removido com sucesso"] as JSON)
 
     }
 }
